@@ -1,0 +1,21 @@
+application: xiamickin
+version: 5
+runtime: python27
+api_version: 1
+threadsafe: true
+
+handlers:
+- url: /favicon\.ico
+  static_files: favicon.ico
+  upload: favicon\.ico
+
+- url: /reg\.css
+  static_files: reg.css
+  upload: reg\.css
+
+- url: /bg\.png
+  static_files: bg.png
+  upload: bg\.png
+
+- url: /.*
+  script: main.app
