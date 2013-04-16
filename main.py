@@ -15,14 +15,18 @@ def get_info(email,password):
     urllib2.install_opener(opener)
     #login
     login_url = 'http://www.xiami.com/web/login'
-    login_data = urllib.urlencode({'email':email, 'password':password, 'LoginButton':'\xe7\x99\xbb\xe9\x99\x86',})
+    login_data = urllib.urlencode({'email':email,
+                                   'password':password,
+                                   'LoginButton':'\xe7\x99\xbb\xe9\x99\x86',
+                                   'remember': 1,
+                                   })
     login_headers = {'Referer':'http://www.xiami.com/web/login', 'User-Agent':'Opera/9.60',}
     login_request = urllib2.Request(login_url, login_data, login_headers)
     #login_url='http://www.xiami.com/web'
     #login_request = urllib2.Request(login_url)
     urllib2.urlopen(login_request)
     profile_url="http://www.xiami.com/web/profile"
-    profile_request = urllib2.Request(profile_url)
+    profile_request = urllib2.Request(profile_url,headers=login_headers)
     profile_response=urllib2.urlopen(profile_request).read()
     info['id']=re.findall(uid_re,profile_response)[0]
     info['cookie']=cookie.dump()
